@@ -635,7 +635,7 @@
     }
 
     function editProduct(id) {
-      const product = products.find(item => item.id === id);
+      const product = products.find(item => item.id == id);
       if (product) showForm(product);
     }
 
