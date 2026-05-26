@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user && $password === $user['PASSWORD']) {
             $_SESSION['user_id']  = $user['id'];
             $_SESSION['username'] = $user['username'];
-            header("Location: Homepage.html");
+            header("Location: index.html");
             exit;
         } else {
             $error = "Invalid username or password.";
