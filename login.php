@@ -2,14 +2,15 @@
 session_start();
 
 // Database connection
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pass = '';
-$db_name = 'petshop_db';
+$db_host = getenv('MYSQLHOST');
+$db_user = getenv('MYSQLUSER');
+$db_pass = getenv('MYSQLPASSWORD');
+$db_name = getenv('MYSQLDATABASE');
+$db_port = getenv('MYSQLPORT') ?: '3306';
 
 try {
     $pdo = new PDO(
-        "mysql:host=$db_host;dbname=$db_name;charset=utf8mb4",
+        "mysql:host=$db_host;port=$db_port;dbname=$db_name;charset=utf8mb4",
         $db_user,
         $db_pass,
         [
@@ -34,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$username]);
         $user = $stmt->fetch();
 
-        // Check if user exists and password matches (plain text comparison)
         if ($user && $password === $user['PASSWORD']) {
             $_SESSION['user_id']  = $user['id'];
             $_SESSION['username'] = $user['username'];
@@ -194,7 +194,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
 
       <button class="btn-login" type="submit">LOGIN</button>
-      
     </form>
 
     <p class="register-text">Don't have an account? <a href="register.php">Register</a></p>
