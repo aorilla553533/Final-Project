@@ -3,7 +3,7 @@ $host     = getenv('MYSQLHOST');
 $dbname   = getenv('MYSQLDATABASE');
 $username = getenv('MYSQLUSER');
 $password = getenv('MYSQLPASSWORD');
-$port     = getenv('MYSQLPORT') ?: 3306;
+$port     = (int)(getenv('MYSQLPORT') ?: 3306);
 
 $conn = new mysqli($host, $username, $password, $dbname, $port);
 
